@@ -52,7 +52,7 @@ header{margin-bottom:5rem;}
   padding:0.3rem 0 0.3rem 1.25rem;
 }
 .focus h2{font-size:0.8rem;color:var(--ink-soft);font-weight:500;margin-bottom:0.5rem;}
-.focus p{font-size:1.02rem;}
+.focus p{font-size:1.02rem;text-align:justify;}
 
 @media (max-width:520px){
   .hero{grid-template-columns:1fr;text-align:left;}
