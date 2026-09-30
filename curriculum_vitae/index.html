@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matthieu Vigneron — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cv-style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="mark">Matthieu Vigneron</span>
+      <div class="lang-switch">
+        <button id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </header>
+
+    <div class="title-block">
+      <h1><span class="fr">Curriculum Vitae</span><span class="en">Curriculum Vitae</span></h1>
+      <p class="role">
+        <span class="fr"></span>
+        <span class="en"></span>
+      </p>
+      <p class="summary">
+        <span class="fr">Après une <b>Double Licence Mathématiques - Informatique</b> à l'<b>Université d'Angers</b>, je suis entré à l'<b>Ecole Normale Supérieure</b> de <b>Paris-Saclay</b> en deuxième année (<i>Master 1 Parisien de Recherche en Informatique (MPRI1)</i>). Je suis aussi <b>arbitre officiel de basketball</b> au <b>niveau régional</b> et <b>bénévole dans la bibliothèque de ma commune</b>.</span>
+        <span class="en">After a <b>Double Bachelor in Mathematics and Computer Science</b>, I entered at the <b>Ecole Normale Supérieure</b> of <b>Paris-Saclay</b>, in Second Year (<i>Parisian Master of Computer Science Research 1</i>). I am also an <b>official basketball referee</b> at the <b>regional level</b> and <b>voluntary in my town's library</b>.</span>
+      </p>
+    </div>
+
+    <section>
+      <h2><span class="fr">Formation</span><span class="en">Education</span></h2>
+      <div class="entry">
+        <div class="when"><span class="fr">2026 - 2029</span><span class="en">2026 - 2029</span></div>
+        <div class="what">
+          <strong><span class="fr">Diplôme de l'ENS Paris-Saclay - Master en Informatique</span><span class="en">ENS Paris-Saclay diploma - Computer Science Master</span></strong>
+          <div class="place">Ecole Normale Supérieure de Paris Saclay (91190 Gif-sur-Yvette)</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="when"><span class="fr">2023 - 2026</span><span class="en">2023 - 2026</span></div>
+        <div class="what">
+          <strong><span class="fr">Double Licence Mathématique - Informatique</span><span class="en">Double Bachelor in Mathematics and Computer Science</span></strong>
+          <div class="place">Université d'Angers (49000 Angers)</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="fr">Expérience</span><span class="en">Experience</span></h2>
+      <div class="entry">
+        <div class="when"><span class="fr">2022 - actuel</span><span class="en">2022 - actual</span></div>
+        <div class="what">
+          <strong><span class="fr">Arbitre officiel de basketball</span><span class="en">Official basketball referee</span></strong>
+          <div class="place">Comité de Vendée de basketball - Ligue des Pays de la Loire de basketball - Ligue d'Île-de-France de basketball</div>
+          <p><span class="fr">Tous les weekends, j'arbitre environ deux matchs de basketball de niveaux régionaux. Cela me permet de travailler la prise de décision rapide, la communication verbale et non-verbale, la pédagogie.</span><span class="en">All weekends, I refer around two basketball matches (regional level). I work fast decision taking, communication (oral and not), teaching skills.</span></p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="when"><span class="fr">2017 - actuel</span><span class="en">2017 - actual</span></div>
+        <div class="what">
+          <strong><span class="fr">Bibliothécaire bénévole</span><span class="en">Voluntary librarian</span></strong>
+          <div class="place">Bibliothèque de Saint-André-Goule-d'Oie</div>
+          <p><span class="fr">Au moins une fois par mois, je tiens une permanance d'une demi-journée pour accueillir les lecteurs et enregistrer leurs emprunts/retours. Je suis aussi co-gérant des réseaux sociaux de la bibliothèque.</span><span class="en">At least once a month, I welcome readers during an half-day and I register books which are borrowed/returned. I am also one of the manager of the library's social medias.</span></p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2><span class="fr">Compétences</span><span class="en">Skills</span></h2>
+      <div class="tags">
+        <span class="fr">Bureautique Office</span><span class="en">Office equipment</span><span>Python, C++, Java, HTML, CSS, JS, PHP, SQL, PROLOG, OCAML</span><span class="fr">Certification PIX : P-2HD74H2Q</span><span class="en">PIX Certification : P-2HD74H2Q</span>
+      </div>
+    </section>
+    <section>
+      <h2><span class="fr">Langues</span><span class="en">Languages</span></h2>
+      <div class="langs">
+        <div><strong>Français</strong><span><span class="fr">Natif</span><span class="en">Native</span></span></div>
+        <div><strong>English</strong><span><span class="fr">B1</span><span class="en">B1</span></span></div>
+        <div><strong>Español</strong><span><span class="fr">B1</span><span class="en">B1</span></span></div>
+      </div>
+    </section>
+    <footer>
+      <p>&copy; <span id="year"></span> Matthieu Vigneron. <span class="fr">Tous droits réservés.</span><span class="en">All rights reserved.</span></p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function setLang(lang){
+      document.querySelectorAll('.fr').forEach(function(el){ el.style.display = lang === 'fr' ? '' : 'none'; });
+      document.querySelectorAll('.en').forEach(function(el){ el.style.display = lang === 'en' ? '' : 'none'; });
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+    }
+    setLang('fr');
+  </script>
+</body>
+</html>
