@@ -16,7 +16,7 @@
   html{scroll-padding-top:env(safe-area-inset-top,0px);}
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
-  .wrap{width:90%;max-width:900px;margin:0 auto;padding:3.5rem 0 5rem;}
+  .wrap{width:90%;margin:0 auto;padding:3.5rem 0 5rem;}
 
   header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3.5rem;gap:1rem;flex-wrap:wrap;}
   .mark{font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--ink-soft);}
