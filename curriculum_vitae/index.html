@@ -18,70 +18,122 @@
         <button id="btn-en" onclick="setLang('en')">EN</button>
       </div>
     </header>
-
-    <div class="title-block">
-      <h1><span class="fr">Curriculum Vitae</span><span class="en">Curriculum Vitae</span></h1>
-      <p class="role">
-        <span class="fr"></span>
-        <span class="en"></span>
-      </p>
-      <p class="summary">
-        <span class="fr">Après une <b>Double Licence Mathématiques - Informatique</b> à l'<b>Université d'Angers</b>, je suis entré à l'<b>Ecole Normale Supérieure</b> de <b>Paris-Saclay</b> en deuxième année (<i>Master 1 Parisien de Recherche en Informatique (MPRI1)</i>). Je suis aussi <b>arbitre officiel de basketball</b> au <b>niveau régional</b> et <b>bénévole dans la bibliothèque de ma commune</b>.</span>
-        <span class="en">After a <b>Double Bachelor in Mathematics and Computer Science</b>, I entered at the <b>Ecole Normale Supérieure</b> of <b>Paris-Saclay</b>, in Second Year (<i>Parisian Master of Computer Science Research 1</i>). I am also an <b>official basketball referee</b> at the <b>regional level</b> and <b>voluntary in my town's library</b>.</span>
-      </p>
+    <div class="cv-grid">
+      <aside class="sidebar">
+        <div class="avatar">
+          <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 88'%3E%3Crect width='88' height='88' fill='%23CFDAE0'/%3E%3Ccircle cx='44' cy='34' r='16' fill='%239FB7C4'/%3E%3Cpath d='M12 82c4-20 20-30 32-30s28 10 32 30' fill='%239FB7C4'/%3E%3C/svg%3E" alt="Photo de Matthieu Vigneron">
+        </div>
+        <div class="side-block">
+          <h2><span class="fr">Contact</span><span class="en">Contact</span></h2>
+          <p><span class="fr">E-mail</span><span class="en">Email</span><br><a href="mailto:matthieu.vigneron13@gmail.com">matthieu.vigneron13@gmail.com</a></p>
+          <p><span class="fr">Mobile</span><span class="en">Phone</span><br>+33 7 88 15 36 87</p>
+          <p><span class="fr">Adresse</span><span class="en">Address</span><br>34 lotissement du Guérinet,<br>85250 Saint-André-Goule-d'Oie</p>
+        </div>
+        <div class="side-block">
+          <h2><span class="fr">Langues</span><span class="en">Languages</span></h2>
+          <p><span class="fr">Français</span><span class="en">French</span> — <span class="fr">natif</span><span class="en">native</span></p>
+          <p><span class="fr">Anglais</span><span class="en">English</span> — B1</p>
+          <p><span class="fr">Espagnol</span><span class="en">Spanish</span> — B1</p>
+        </div>
+        <div class="side-block">
+          <h2><span class="fr">Permis</span><span class="en">Driving licence</span></h2>
+          <p><span class="fr">Permis B</span><span class="en">Category B</span> — N°24AD54742</p>
+        </div>
+        <div class="side-block">
+          <h2><span class="fr">Compétences</span><span class="en">Skills</span></h2>
+          <div class="tags">
+            <span><span class="fr">Bureautique Office</span><span class="en">Office suite</span></span>
+            <span>HTML</span><span>CSS</span><span>SQL</span><span>PHP</span><span>JS</span><span>Python</span><span>C++</span><span>Prolog</span><span>OCaml</span>
+          </div>
+          <p class="fine"><span class="fr">Certification Pix : P-2HD74H2Q</span><span class="en">Pix certification: P-2HD74H2Q</span></p>
+        </div>
+        <div class="side-block">
+          <h2><span class="fr">Centres d'intérêt</span><span class="en">Interests</span></h2>
+          <p><strong><span class="fr">Sport et basket-ball</span><span class="en">Sport & basketball</span></strong><br>
+            <span class="fr">10 ans de pratique, 4 ans de coaching, 5 ans d'arbitrage</span>
+            <span class="en">10 years playing, 4 years coaching, 5 years refereeing</span></p>
+          <p><strong><span class="fr">Lecture</span><span class="en">Reading</span></strong><br>
+            <span class="fr">9 ans de bénévolat en bibliothèque ; magie, science-fiction, policiers (Gardiens des Cités Perdues, N.E.O., Son espionne royale, l'univers des Chevaliers d'Emeraude)</span>
+            <span class="en">9 years volunteering in a library; magic, science-fiction, thrillers (Keeper of the Lost Cities, N.E.O., Royal Spyness, the Emerald Knights universe)</span></p>
+        </div>
+      </aside>
+      <main class="main-col">
+        <section>
+          <h2><span class="fr">Formation</span><span class="en">Education</span></h2>
+          <div class="entry">
+            <div class="when">2026 – 2029</div>
+            <div class="what">
+              <strong><span class="fr">Diplôme de l'ENS Paris-Saclay en Informatique</span><span class="en">ENS Paris-Saclay Diploma in Computer Science</span></strong>
+              <div class="place">École Normale Supérieure de Paris-Saclay</div>
+              <p>
+                <span class="fr">Master 1 – Recherche en Informatique<br>Master 2 – Formation à l'Enseignement Supérieur (préparation à l'agrégation)<br>Master 2 – …</span>
+                <span class="en">Master 1 – Computer Science Research<br>Master 2 – Higher Education Teacher Training (agrégation preparation)<br>Master 2 – …</span>
+              </p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="when">2023 – 2026</div>
+            <div class="what">
+              <strong><span class="fr">Double Licence Mathématiques &amp; Informatique</span><span class="en">Dual Bachelor's — Mathematics &amp; Computer Science</span></strong>
+              <div class="place">Université d'Angers</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="when">2020 – 2023</div>
+            <div class="what">
+              <strong><span class="fr">Baccalauréat général, mention très bien</span><span class="en">French Baccalaureate, highest honours</span></strong>
+              <div class="place">Lycée Jean 23, Les Herbiers</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2><span class="fr">Expériences professionnelles</span><span class="en">Professional experience</span></h2>
+          <div class="entry">
+            <div class="when"><span class="fr">Depuis sept. 2022</span><span class="en">Since Sept. 2022</span></div>
+            <div class="what">
+              <strong><span class="fr">Arbitre officiel de basketball</span><span class="en">Official basketball referee</span></strong>
+              <div class="place"><span class="fr">Ligue des Pays de la Loire / Ligue d'Île-de-France de Basketball</span><span class="en">Pays de la Loire League / Île-de-France Basketball League</span></div>
+              <p>
+                <span class="fr">Tous les week-ends, j'arbitre un ou plusieurs matchs de niveau régional, en tant qu'arbitre officiel régional reconnu par la ligue de Basketball des Pays de la Loire. J'y apprends la pédagogie, la gestion d'imprévus, la rigueur et la communication.</span>
+                <span class="en">Every weekend, I referee one or more regional-level matches as an official referee recognised by the Pays de la Loire Basketball League. I develop teaching skills, adaptability, rigour and communication.</span>
+              </p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="when"><span class="fr">Depuis janv. 2018</span><span class="en">Since Jan. 2018</span></div>
+            <div class="what">
+              <strong><span class="fr">Bibliothécaire bénévole</span><span class="en">Volunteer librarian</span></strong>
+              <div class="place">Bibliothèque Boukinou — Saint-André-Goule-d'Oie</div>
+              <p>
+                <span class="fr">Un dimanche matin par mois, je tiens une permanence pour accueillir, conseiller et enregistrer les prêts et les retours des livres. J'y apprends l'écoute et la communication.</span>
+                <span class="en">One Sunday morning a month, I run the front desk: welcoming visitors, giving recommendations and handling loans and returns. I develop listening and communication skills.</span>
+              </p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="when"><span class="fr">Sept. 2022 – juin 2023</span><span class="en">Sept. 2022 – June 2023</span></div>
+            <div class="what">
+              <strong><span class="fr">Trésorier</span><span class="en">Treasurer</span></strong>
+              <div class="place">Maison des Lycéens — Lycée Jean 23</div>
+              <p>
+                <span class="fr">Avec le bureau et les membres de l'association, nous organisions des événements pour les lycéens (radio du lycée, sorties, journées à thèmes). J'y apprends le travail d'équipe et l'organisation.</span>
+                <span class="en">With the board and association members, we organised events for students (school radio, outings, themed days). I develop teamwork and organisational skills.</span>
+              </p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="when"><span class="fr">Ponctuel</span><span class="en">Occasional</span></div>
+            <div class="what">
+              <strong><span class="fr">Bénévole lors d'événements sportifs</span><span class="en">Volunteer at sporting events</span></strong>
+              <p>
+                <span class="fr">Passage de la Flamme olympique à Angers (49) et à Montaigu (85) ; Championnats de France de Cyclisme sur route aux Herbiers (85).</span>
+                <span class="en">Olympic Torch relay in Angers (49) and Montaigu (85); French Road Cycling Championships in Les Herbiers (85).</span>
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-
-    <section>
-      <h2><span class="fr">Formation</span><span class="en">Education</span></h2>
-      <div class="entry">
-        <div class="when"><span class="fr">2026 - 2029</span><span class="en">2026 - 2029</span></div>
-        <div class="what">
-          <strong><span class="fr">Diplôme de l'ENS Paris-Saclay - Master en Informatique</span><span class="en">ENS Paris-Saclay diploma - Computer Science Master</span></strong>
-          <div class="place">Ecole Normale Supérieure de Paris Saclay (91190 Gif-sur-Yvette)</div>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when"><span class="fr">2023 - 2026</span><span class="en">2023 - 2026</span></div>
-        <div class="what">
-          <strong><span class="fr">Double Licence Mathématique - Informatique</span><span class="en">Double Bachelor in Mathematics and Computer Science</span></strong>
-          <div class="place">Université d'Angers (49000 Angers)</div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2><span class="fr">Expérience</span><span class="en">Experience</span></h2>
-      <div class="entry">
-        <div class="when"><span class="fr">2022 - actuel</span><span class="en">2022 - actual</span></div>
-        <div class="what">
-          <strong><span class="fr">Arbitre officiel de basketball</span><span class="en">Official basketball referee</span></strong>
-          <div class="place">Comité de Vendée de basketball - Ligue des Pays de la Loire de basketball - Ligue d'Île-de-France de basketball</div>
-          <p><span class="fr">Tous les weekends, j'arbitre environ deux matchs de basketball de niveaux régionaux. Cela me permet de travailler la prise de décision rapide, la communication verbale et non-verbale, la pédagogie.</span><span class="en">All weekends, I refer around two basketball matches (regional level). I work fast decision taking, communication (oral and not), teaching skills.</span></p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when"><span class="fr">2017 - actuel</span><span class="en">2017 - actual</span></div>
-        <div class="what">
-          <strong><span class="fr">Bibliothécaire bénévole</span><span class="en">Voluntary librarian</span></strong>
-          <div class="place">Bibliothèque de Saint-André-Goule-d'Oie</div>
-          <p><span class="fr">Au moins une fois par mois, je tiens une permanance d'une demi-journée pour accueillir les lecteurs et enregistrer leurs emprunts/retours. Je suis aussi co-gérant des réseaux sociaux de la bibliothèque.</span><span class="en">At least once a month, I welcome readers during an half-day and I register books which are borrowed/returned. I am also one of the manager of the library's social medias.</span></p>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h2><span class="fr">Compétences</span><span class="en">Skills</span></h2>
-      <div class="tags">
-        <span class="fr">Bureautique Office</span><span class="en">Office equipment</span><span>Python, C++, Java, HTML, CSS, JS, PHP, SQL, PROLOG, OCAML</span><span class="fr">Certification PIX : P-2HD74H2Q</span><span class="en">PIX Certification : P-2HD74H2Q</span>
-      </div>
-    </section>
-    <section>
-      <h2><span class="fr">Langues</span><span class="en">Languages</span></h2>
-      <div class="langs">
-        <div><strong>Français</strong><span><span class="fr">Natif</span><span class="en">Native</span></span></div>
-        <div><strong>English</strong><span><span class="fr">B1</span><span class="en">B1</span></span></div>
-        <div><strong>Español</strong><span><span class="fr">B1</span><span class="en">B1</span></span></div>
-      </div>
-    </section>
     <footer>
       <p>&copy; <span id="year"></span> Matthieu Vigneron. <span class="fr">Tous droits réservés.</span><span class="en">All rights reserved.</span></p>
     </footer>
