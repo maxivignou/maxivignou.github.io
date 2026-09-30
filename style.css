@@ -33,9 +33,13 @@ header{margin-bottom:5rem;}
 .mark{font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--ink-soft);}
 
 /* hero */
-.hero{display:grid;grid-template-columns:auto 1fr;gap:2.25rem;align-items:center;margin-bottom:4rem;}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:2.25rem;align-items:stretch;margin-bottom:4rem;}
 .avatar{
-  width:88px;height:88px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  width:140px;
+  height:100%;
+  border-radius:12px;
+  overflow:hidden;
+  flex-shrink:0;
   background:var(--line);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
