@@ -13,13 +13,26 @@ function downloadPDF(){
   var actions = document.querySelector('.header-actions');
   actions.classList.add('pdf-hide');
 
+  var pxToMm = 0.2645833333; // conversion pixels → millimètres (96 dpi)
+  var widthMm = el.scrollWidth * pxToMm;
+  var heightMm = el.scrollHeight * pxToMm;
+
   var opt = {
-    margin: 8,
+    margin: 0,
     filename: document.title.replace(/\s*[—-]\s*/g, '-') + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] }
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      windowWidth: el.scrollWidth,
+      windowHeight: el.scrollHeight
+    },
+    jsPDF: {
+      unit: 'mm',
+      format: [widthMm, heightMm],
+      orientation: widthMm > heightMm ? 'landscape' : 'portrait'
+    },
+    pagebreak: { mode: ['avoid-all'] }
   };
 
   html2pdf().set(opt).from(el).save().then(function(){
