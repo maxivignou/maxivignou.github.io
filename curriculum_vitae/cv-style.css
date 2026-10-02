@@ -22,6 +22,8 @@ body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-se
 
 header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;gap:1rem;flex-wrap:wrap;}
 .mark{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:600;color:var(--ink);}
+.header-actions{display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;}
+
 .lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex-shrink:0;}
 .lang-switch button{
   border:none;background:transparent;color:var(--ink-soft);
@@ -29,6 +31,14 @@ header{display:flex;justify-content:space-between;align-items:flex-start;margin-
   padding:0.4rem 0.9rem;cursor:pointer;
 }
 .lang-switch button.active{background:var(--accent);color:#fff;}
+
+.pdf-btn{
+  border:1px solid var(--line);border-radius:999px;background:transparent;
+  color:var(--ink-soft);font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;
+  padding:0.4rem 0.9rem;cursor:pointer;flex-shrink:0;
+}
+.pdf-btn:hover{border-color:var(--accent);color:var(--accent);}
+.pdf-hide{display:none !important;}
 
 .cv-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:start;}
 
