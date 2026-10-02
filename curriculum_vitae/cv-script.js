@@ -11,34 +11,29 @@ setLang('fr');
 function downloadPDF(){
   var el = document.querySelector('.wrap');
   var actions = document.querySelector('.header-actions');
+  var footer = document.querySelector('footer');
   actions.classList.add('pdf-hide');
+  footer.classList.add('pdf-hide');
 
   var pxToMm = 0.2645833333; // conversion pixels → millimètres (96 dpi)
   var widthMm = el.scrollWidth * pxToMm;
   var heightMm = el.scrollHeight * pxToMm;
 
-  var opt = {
-    margin: 0,
-    filename: document.title.replace(/\s*[—-]\s*/g, '-') + '.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      windowWidth: el.scrollWidth,
-      windowHeight: el.scrollHeight
-    },
-    jsPDF: {
+  html2canvas(el, { scale: 2, useCORS: true, scrollX: 0, scrollY: 0 }).then(function(canvas){
+    var imgData = canvas.toDataURL('image/jpeg', 0.98);
+    var doc = new window.jspdf.jsPDF({
       unit: 'mm',
       format: [widthMm, heightMm],
       orientation: widthMm > heightMm ? 'landscape' : 'portrait'
-    },
-    pagebreak: { mode: ['avoid-all'] }
-  };
+    });
+    doc.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
+    doc.save(document.title.replace(/\s*[—-]\s*/g, '-') + '.pdf');
 
-  html2pdf().set(opt).from(el).save().then(function(){
     actions.classList.remove('pdf-hide');
+    footer.classList.remove('pdf-hide');
   }).catch(function(err){
     actions.classList.remove('pdf-hide');
+    footer.classList.remove('pdf-hide');
     console.error('Erreur export PDF :', err);
   });
 }
