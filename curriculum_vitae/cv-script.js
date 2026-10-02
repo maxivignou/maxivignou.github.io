@@ -16,17 +16,20 @@ function downloadPDF(){
   footer.classList.add('pdf-hide');
 
   var pxToMm = 0.2645833333; // conversion pixels → millimètres (96 dpi)
-  var widthMm = el.scrollWidth * pxToMm;
-  var heightMm = el.scrollHeight * pxToMm;
+  var marginMm = 10; // marge blanche de chaque côté
+  var contentWidthMm = el.scrollWidth * pxToMm;
+  var contentHeightMm = el.scrollHeight * pxToMm;
+  var pageWidthMm = contentWidthMm + marginMm * 2;
+  var pageHeightMm = contentHeightMm + marginMm * 2;
 
   html2canvas(el, { scale: 2, useCORS: true, scrollX: 0, scrollY: 0 }).then(function(canvas){
     var imgData = canvas.toDataURL('image/jpeg', 0.98);
     var doc = new window.jspdf.jsPDF({
       unit: 'mm',
-      format: [widthMm, heightMm],
-      orientation: widthMm > heightMm ? 'landscape' : 'portrait'
+      format: [pageWidthMm, pageHeightMm],
+      orientation: pageWidthMm > pageHeightMm ? 'landscape' : 'portrait'
     });
-    doc.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
+    doc.addImage(imgData, 'JPEG', marginMm, marginMm, contentWidthMm, contentHeightMm);
     doc.save(document.title.replace(/\s*[—-]\s*/g, '-') + '.pdf');
 
     actions.classList.remove('pdf-hide');
