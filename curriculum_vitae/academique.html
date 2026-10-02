@@ -13,9 +13,14 @@
   <div class="wrap">
     <header>
       <span class="mark">Matthieu Vigneron</span>
-      <div class="lang-switch">
-        <button id="btn-fr" onclick="setLang('fr')">FR</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
+      <div class="header-actions">
+        <div class="lang-switch">
+          <button id="btn-fr" onclick="setLang('fr')">FR</button>
+          <button id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="pdf-btn" onclick="downloadPDF()">
+          <span class="fr">Télécharger en PDF</span><span class="en">Download PDF</span>
+        </button>
       </div>
     </header>
     <div class="cv-grid">
@@ -367,17 +372,7 @@
       <p class="fine">Dernière mise à jour : <span id="last-update"></span></p>
     </footer>
   </div>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('last-update').textContent = new Date(document.lastModified).toLocaleDateString('fr-FR');
-    function setLang(lang){
-      document.querySelectorAll('.fr').forEach(function(el){ el.style.display = lang === 'fr' ? '' : 'none'; });
-      document.querySelectorAll('.en').forEach(function(el){ el.style.display = lang === 'en' ? '' : 'none'; });
-      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.documentElement.lang = lang;
-    }
-    setLang('fr');
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="cv-script.js"></script>
 </body>
 </html>
