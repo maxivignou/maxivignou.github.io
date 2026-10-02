@@ -71,3 +71,11 @@ footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);fon
   .entry{grid-template-columns:1fr;gap:0.3rem;}
 }
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+/* listes à puce losange (CV académique) */
+.diamond-list{list-style:none;margin-top:0.5rem;}
+.diamond-list li{position:relative;padding-left:1.2rem;margin-bottom:0.6rem;font-size:0.94rem;}
+.diamond-list li::before{
+  content:"⋄";position:absolute;left:0;top:0;
+  color:var(--accent);font-weight:600;
+}
