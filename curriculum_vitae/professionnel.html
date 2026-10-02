@@ -136,10 +136,12 @@
     </div>
     <footer>
       <p>&copy; <span id="year"></span> Matthieu Vigneron. <span class="fr">Tous droits réservés.</span><span class="en">All rights reserved.</span></p>
+      <p class="fine">Dernière mise à jour : <span id="last-update"></span></p>
     </footer>
   </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('last-update').textContent = new Date(document.lastModified).toLocaleDateString('fr-FR');
     function setLang(lang){
       document.querySelectorAll('.fr').forEach(function(el){ el.style.display = lang === 'fr' ? '' : 'none'; });
       document.querySelectorAll('.en').forEach(function(el){ el.style.display = lang === 'en' ? '' : 'none'; });
