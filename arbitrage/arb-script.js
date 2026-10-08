@@ -142,35 +142,70 @@ document.getElementById('year').textContent = new Date().getFullYear();
       options: lineOptions(fmtEuro, true)
     });
 
-    // 3) dépenses (brut − net) selon la distance
-    function pt(m){ return { x: m.dist, y: m.cost, date: m.dateText }; }
-    var others = matches.filter(function(m){ return !active || m.season !== filter; });
-    var inSeason = matches.filter(function(m){ return active && m.season === filter; });
+        // 3) dépenses (brut − net) selon la distance
+    // un point = une combinaison (distance, dépenses) ; sa taille = nombre de matchs concernés
+    var bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+
+    function group(list){
+      var map = {};
+      list.forEach(function(m){
+        var k = m.dist + '|' + m.cost;
+        if (!map[k]) map[k] = { x: m.dist, y: m.cost, ms: [] };
+        map[k].ms.push(m);
+      });
+      return Object.keys(map).map(function(k){ return map[k]; });
+    }
+    function size(p, base){ return base + Math.sqrt(p.ms.length - 1) * 2.2; }
+    function short(s){ return s.length > 20 ? s.slice(0, 19) + '…' : s; }
+    function dkey(m){ return m.dateText.split('/').reverse().join(''); }
+
+    var others = group(matches.filter(function(m){ return !active || m.season !== filter; }));
+    var inSeason = group(matches.filter(function(m){ return active && m.season === filter; }));
+
     var datasets = [{
-      label: active ? 'Autres saisons' : 'Matchs', data: others.map(pt), order: 1,
-      pointRadius: active ? 3 : 4,
-      backgroundColor: active ? withAlpha(c.sage, '73') : withAlpha(c.accent, 'B3'),
-      borderColor: active ? withAlpha(c.sage, '73') : withAlpha(c.accent, 'B3')
+      label: active ? 'Autres saisons' : 'Matchs', data: others, order: 1,
+      pointRadius: others.map(function(p){ return size(p, active ? 3 : 4); }),
+      pointHoverRadius: others.map(function(p){ return size(p, active ? 3 : 4) + 2; }),
+      backgroundColor: active ? withAlpha(c.sage, '66') : c.accent,
+      borderColor: active ? withAlpha(c.sage, '66') : bg,
+      borderWidth: 1.5
     }];
     if (active){
       datasets.push({
-        label: 'Saison ' + filter, data: inSeason.map(pt), order: 0,
-        pointRadius: 6, pointHoverRadius: 8, pointBorderWidth: 2,
-        backgroundColor: c.accent, borderColor: c.ink
+        label: 'Saison ' + filter, data: inSeason, order: 0,
+        pointRadius: inSeason.map(function(p){ return size(p, 5); }),
+        pointHoverRadius: inSeason.map(function(p){ return size(p, 5) + 2; }),
+        backgroundColor: c.accent, borderColor: c.ink, borderWidth: 2
       });
     }
+
     charts.depenses = new Chart(document.getElementById('chart-depenses'), {
       type: 'scatter',
       data: { datasets: datasets },
       options: {
         responsive: true, maintainAspectRatio: false, animation: false,
+        interaction: { mode: 'nearest', intersect: true },
         layout: { padding: { top: 6, right: 10 } },
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: {
-            title: function(items){ return items[0].raw.date; },
-            label: function(ctx){ return ['Distance : ' + ctx.raw.x + ' km', 'Dépenses : ' + fmtEuro(ctx.raw.y)]; }
-          } }
+          tooltip: {
+            displayColors: false,
+            filter: function(item, i, items){
+              return item.datasetIndex === 1 || !items.some(function(x){ return x.datasetIndex === 1; });
+            },
+            callbacks: {
+              title: function(items){ var p = items[0].raw; return p.x + ' km · ' + fmtEuro(p.y) + ' de frais'; },
+              label: function(ctx){
+                var ms = ctx.raw.ms.slice().sort(function(a, b){ return dkey(b).localeCompare(dkey(a)); });
+                var lines = ms.slice(0, 3).map(function(m){
+                  return m.dateText + ' · ' + short(m.tr.cells[1].textContent.trim()) + ' – ' + short(m.tr.cells[2].textContent.trim());
+                });
+                if (ms.length > 1) lines.unshift(ms.length + ' matchs :');
+                if (ms.length > 3) lines.push('… et ' + (ms.length - 3) + ' autre' + (ms.length - 3 > 1 ? 's' : ''));
+                return lines;
+              }
+            }
+          }
         },
         scales: {
           x: { beginAtZero: true, grid: { color: c.line }, title: { display: true, text: 'Distance (km)', color: c.soft } },
@@ -179,7 +214,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       }
     });
   }
-
+  
   // ---------- branchement ----------
   function refresh(){ updateTableAndKpis(); renderCharts(); }
 
