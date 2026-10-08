@@ -83,10 +83,14 @@
 
     <footer>
       <p>&copy; <span id="year"></span> Matthieu Vigneron. Tous droits réservés.</p>
+      <p class="fine">Dernière mise à jour : <span id="last-update"></span></p>
     </footer>
 
   </div>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('last-update').textContent = new Date(document.lastModified).toLocaleDateString('fr-FR');
+  </script>
 </body>
 </html>
