@@ -216,9 +216,15 @@
 
     <footer>
       <p>&copy; <span id="year"></span> Matthieu Vigneron. Tous droits réservés.</p>
+      <p class="fine">Dernière mise à jour : <span id="last-update"></span></p>
     </footer>
 
   </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('last-update').textContent = new Date(document.lastModified).toLocaleDateString('fr-FR');
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.js"></script>
   <script src="arb-script.js"></script>
