@@ -1,5 +1,3 @@
-document.getElementById('year').textContent = new Date().getFullYear();
-
 (function(){
   var MOIS_DEBUT_SAISON = 7; // une saison va de juillet (N) à juin (N+1)
 
