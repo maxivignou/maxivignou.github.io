@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matthieu Vigneron — Arbitrage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="arb-style.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <span class="mark">Matthieu Vigneron</span>
+    </header>
+
+    <section class="intro">
+      <h1>Arbitrage</h1>
+      <p>Depuis 2022, j'arbitre officiellement des matchs de basketball au niveau régional. Cette page recense les matchs que j'ai officiés, avec quelques statistiques tirées de ce suivi.</p>
+    </section>
+
+    <div class="board">
+
+      <section class="table-zone">
+        <h2>Matchs officiés</h2>
+        <div class="table-scroll">
+          <table id="arb-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Compétition</th>
+                <th>Niveau</th>
+                <th>Équipe A</th>
+                <th>Équipe B</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>14/09/2025</td>
+                <td>Championnat Régional</td>
+                <td>Régional 2</td>
+                <td>Les Herbiers</td>
+                <td>Chauché</td>
+                <td>72–68</td>
+              </tr>
+              <tr>
+                <td>21/09/2025</td>
+                <td>Championnat Régional</td>
+                <td>Régional 2</td>
+                <td>Angers</td>
+                <td>Cholet</td>
+                <td>58–61</td>
+              </tr>
+              <tr>
+                <td>05/10/2025</td>
+                <td>Coupe de France</td>
+                <td>Départemental</td>
+                <td>Montaigu</td>
+                <td>La Roche</td>
+                <td>80–74</td>
+              </tr>
+              <tr>
+                <td>12/10/2025</td>
+                <td>Championnat Régional</td>
+                <td>Régional 2</td>
+                <td>Nantes</td>
+                <td>Laval</td>
+                <td>65–70</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Ajoute une ligne dans le <code>&lt;tbody&gt;</code> pour chaque nouveau match : les graphiques à droite se recalculent automatiquement à partir des colonnes <strong>Date</strong> et <strong>Niveau</strong>.</p>
+      </section>
+
+      <aside class="stats-zone">
+        <h2>Statistiques</h2>
+
+        <div class="chart-card">
+          <h3>Matchs par niveau</h3>
+          <canvas id="chart-niveau"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Matchs par mois</h3>
+          <canvas id="chart-mois"></canvas>
+        </div>
+
+        <div class="chart-card totals">
+          <h3>Total</h3>
+          <p class="big-number" id="total-matchs">0</p>
+          <p class="fine">matchs enregistrés</p>
+        </div>
+      </aside>
+
+    </div>
+
+    <footer>
+      <p>&copy; <span id="year"></span> Matthieu Vigneron. Tous droits réservés.</p>
+    </footer>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script src="arb-script.js"></script>
+</body>
+</html>
