@@ -26,7 +26,9 @@ header{margin-bottom:3rem;}
 .intro p{font-size:1.02rem;color:var(--ink);}
 
 /* grille de projets : autant de colonnes que la largeur le permet */
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+@media (max-width:1000px){ .projects{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:650px){ .projects{grid-template-columns:1fr;} }
 
 .project{
   display:flex;flex-direction:column;gap:0.7rem;
