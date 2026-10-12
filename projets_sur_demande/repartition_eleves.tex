@@ -1,0 +1,138 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+
+% ---------- À modifier ----------
+\newcommand{\nomproduit}{Répartition en tables rondes}
+\definecolor{principale}{HTML}{1F5FA8}
+
+% ---------- Titres ----------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\color{principale}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.8em}{}
+
+% ---------- Encadrés ----------
+\newtcolorbox{note}{colback=blue!5,colframe=blue!60!black,
+  fonttitle=\bfseries,title=Note,breakable}
+\newtcolorbox{astuce}{colback=green!5,colframe=green!45!black,
+  fonttitle=\bfseries,title=Astuce,breakable}
+\newtcolorbox{attention}{colback=orange!8,colframe=orange!80!black,
+  fonttitle=\bfseries,title=Attention,breakable}
+\newtcolorbox{danger}{colback=red!6,colframe=red!70!black,
+  fonttitle=\bfseries,title=Danger,breakable}
+
+\begin{document}
+
+% ---------- Page de titre ----------
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\color{principale}\rule{\linewidth}{1.5pt}}\\[0.8cm]
+  {\Huge\bfseries\color{principale} Guide d'utilisation\par}
+  \vspace{0.5cm}
+  {\LARGE \nomproduit\par}
+  \vspace{0.4cm}
+  {\color{principale}\rule{\linewidth}{1.5pt}}\\[2cm]
+  {\large \today\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\label{sec:introduction}
+Cette application permet d'organiser un système de tables rondes sur plusieurs créneaux : Chacun des participants a fait un certain nombre de voeux, les places sont limitées pour chaque intervenant sur un créneau, et il faut répartir les participants en respectant dans la mesure du possible leurs voeux.
+
+L'application \nomproduit{} permet de donner une répartition des participants sur chacune des tables.
+Ce guide explique comment utiliser \nomproduit{} en quelques étapes.
+
+\begin{note}
+Ce guide d'utilisation s'adresse aux personnes disposant d'un ordinateur Windows.
+\end{note}
+
+\section{Téléchargement}
+\label{sec:telechargement}
+\begin{enumerate}
+  \item Rendez-vous sur le site suivant : \url{https://maxivignou.github.io/projets_sur_demande/}.
+  \item Retrouvez le projet \nomproduit{} et cliquez sur \textit{Téléchargez l'application (.exe)}.
+  \item Ouvrez l'application.
+\end{enumerate}
+
+\begin{astuce}
+Avant de pouvoir utiliser l'application, vous devez disposer des voeux des participants. Ils doivent être formatés de la même manière que dans le fichier modèle. Pour plus d'informations, suivez la \hyperref[sec:voeux]{section \ref{sec:voeux}}.
+\end{astuce}
+
+\section{Mode d'emploi}
+\label{sec:emploi}
+\begin{enumerate}
+  \item Saisissez le nombre d'intervenants (le nombre de tables rondes).
+  \item Saisissez le nombre de créneaux de rencontre.
+  \item Saisissez le nombre de choix à respecter obligatoirement par participants. Chaque participant a choisi des tables rondes qu'il veut impérativement voir. Ces choix seront respectés, quitte à dépasser le seuil de participants par créneau sur une table ronde.
+  \item Saisissez le nombre de choix à respecter si possible : le programme assignera les participants, dans la mesure du possible, à leurs voeux secondaires.
+  \item Saisissez le nombre d'élèves que peut voir un intervenant par créneau : Cela permettra de bloquer le surplus de participants sur une table ronde. \begin{attention} Ce seuil peut être dépassé si trop de participants souhaitent impérativement assister à une table ronde en particulier. \end{attention}
+  \item Importez le fichier des voeux des participants. Le fichier est décrit dans la \hyperref[sec:voeux]{section \ref{sec:voeux}}.
+  \item Envoyer les données et lancez la recherche. \begin{note}Cette page de l'application va se fermer. En fonction du nombre de participants et de tables rondes, la page suivante peut mettre quelques secondes à s'afficher.\end{note}
+  \item Lorsque la page suivante s'affiche, vous recevrez un score pour la solution trouvée. La page vous explique comment interpréter ce score.
+  \item Exportez la solution en enregistrant le fichier où vous le souhaitez. Pour comprendre comment lire le fichier obtenu, suivez la \hyperref[sec:resultats]{section \ref{sec:resultats}}.
+\end{enumerate}
+
+\begin{danger}
+Si vous fermez la deuxième page avant d'avoir exporté le fichier résultats, vous perdrez la solution obtenue. Pensez à bien exporter la solution avant de quitter.
+\end{danger}
+
+\section{Voeux des participants}
+\label{sec:voeux}
+\begin{note}
+Un modèle de fichier est disponible sur le site \url{https://maxivignou.github.io/projets_sur_demande/} : Dans le projet \nomproduit{}, cliquez sur \textit{Téléchargez le modèle de fichier participants (.csv)}.
+\end{note}
+L'application demande les voeux des participants, stockés dans un fichier \textit{.csv}. Cette section vous explique comment créer ce fichier.
+\begin{astuce}
+Avant de créer le fichier, vous devez connaître le nombre de voeux que chaque participant se verra automatiquement validé ($n_{obligatoire}$), et le nombre de voeux qui doivent être validés dans la mesure du possible ($n_{secondaire}$).
+\end{astuce}
+\begin{enumerate}
+  \item Ouvrir un classeur (Microsoft Excel, LibreOffice Calc, OpenOffice Calc, ...)
+  \item Sur la ligne n°1 (ligne d'en-tête), écrivez, dans la première case, le texte \textit{Participant}. Sur les $n_{obligatoire}$ cases suivantes, inscrire le texte \textit{Voeu obligatoire n°...} et sur les $n_{secondaire}$ cases suivantes, inscrire le texte \textit{Voeu secondaire n°...}.
+  \item Chacune des lignes suivante correspond à un participant. Entrez son nom, ses voeux impératifs et ses voeux secondaires, sous forme de numéro entre 1 et le nombre de tables rondes : chaque numéro doit représenter une table ronde. \begin{note} Par exemple, s'il y a 30 tables rondes, le tableau devra contenir des numéros entre 1 et 30. \end{note}
+  \item Enregistrez le fichier au format \textit{.csv} :
+  \begin{enumerate}
+    \item Cliquez sur \textit{Fichier}, puis sur \textit{Enregistrer sous}.
+    \item Choisissez l'emplacement où enregistrer le fichier.
+    \item Dans la liste \textit{Type de fichier}, sélectionnez :
+    \begin{itemize}
+      \item \textit{CSV UTF-8 (délimité par des virgules) (*.csv)} sur Microsoft Excel.
+      \item \textit{Texte CSV (.csv)} sur OpenOffice Calc ou LibreOffice Calc.
+    \end{itemize}
+    \item Saisissez le nom du fichier en conservant l'extension \textit{.csv}, puis cliquez sur \textit{Enregistrer}.
+    \item Pour finir l'enregistrement :
+    \begin{itemize}
+      \item Sur Microsoft Excel, si un message apparaît, confirmez l'utilisation du format CSV.
+      \item Sur LibreOffice Calc et OpenOffice Calc, dans la fenêtre d'options d'exportation, choisissez si nécessaire le jeu de caractères \textit{Unicode (UTF-8)}, le séparateur \textit{;}, puis validez.
+    \end{itemize}
+  \end{enumerate}
+\end{enumerate}
+
+\section{Lire les résultats}
+\label{sec:resultats}
+Lorsque vous avez utilisé l'application, vous avez téléchargé un fichier contenant les résultats. Il s'agit d'un fichier au format \textit{.csv}. Cette section vous explique comment lire les résultats du fichier.
+\begin{enumerate}
+  \item Ouvrir Microsoft Excel, OpenOffice Calc ou LibreOffice Calc.
+  \item Cliquez sur \textit{Fichiers}, puis sur \textit{Ouvrir}.
+  \item Recherchez le fichier \textit{.csv} que vous aviez récupéré. Si nécessaire, choisissez \textit{Tous les fichiers} dans le filtre de fichiers.
+  \item Sélectionnez le fichier \textit{.csv} puis cliquez sur \textit{Ouvrir}.
+  \item Si une fenêtre d'importation apparaît, vérifier que l'encodage (le jeu de caractères) est bien \textit{Unicode UTF-8}, et que le séparateur est \textit{;}. Vérifier alors que l'aperçu renvoie bien quelque chose de lisible, puis validez en cliquant sur \textit{OK}.
+  \item Enregistrez le fichier au format que vous souhaitez (\textit{.xlsx} pour Microsoft Excel ou \textit{.ods} pour LibreOffice Calc ou OpenOffice Calc).
+\end{enumerate}
+Chaque ligne du fichier correspond à un participant. Chaque colonne du fichier correspond à un créneau de rencontre. Ainsi, pour chaque participant et chaque créneau, un numéro de table ronde est assignée.
+
+\section{Conclusion}
+\label{sec:conclusion}
+J'ai essayé de faire en sorte que les explications soient les plus claires possibles. Si vous rencontrez des difficultés, où que vous remarquez une erreur, n'hésitez pas à me contacter à l'adresse mail suivante : \href{mailto:matthieu.vigneron13@gmail.com}{matthieu.vigneron13@gmail.com}. \begin{note} Pour les utilisateurs qui possèdent un ordinateur Linux ou Mac, les fichiers sources sont disponibles sur le site \url{https://maxivignou.github.io/projets_sur_demande/} : Dans le projet \nomproduit{}, cliquez sur \textit{Téléchargez les fichiers sources (.zip)}. \end{note}
+\end{document}
