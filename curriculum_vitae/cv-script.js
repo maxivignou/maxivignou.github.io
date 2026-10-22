@@ -7,7 +7,12 @@ function setLang(lang){
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang;
 }
-setLang('fr');
+const langue = new URLSearchParams(window.location.search);
+if (langue.get("lang") === "EN") {
+  setLang('en');
+} else {
+  setLang('fr');
+}
 function downloadPDF(){
   var el = document.querySelector('.wrap');
   var actions = document.querySelector('.header-actions');
