@@ -1,0 +1,218 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+
+% ---------- À modifier ----------
+\newcommand{\nomproduit}{Assistant Listes de classes}
+\definecolor{principale}{HTML}{1F5FA8}
+
+% ---------- Titres ----------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\color{principale}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.8em}{}
+
+% ---------- Encadrés ----------
+\newtcolorbox{note}{colback=blue!5,colframe=blue!60!black,
+  fonttitle=\bfseries,title=Note,breakable}
+\newtcolorbox{astuce}{colback=green!5,colframe=green!45!black,
+  fonttitle=\bfseries,title=Astuce,breakable}
+\newtcolorbox{attention}{colback=orange!8,colframe=orange!80!black,
+  fonttitle=\bfseries,title=Attention,breakable}
+\newtcolorbox{danger}{colback=red!6,colframe=red!70!black,
+  fonttitle=\bfseries,title=Danger,breakable}
+
+\begin{document}
+
+% ---------- Page de titre ----------
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\color{principale}\rule{\linewidth}{1.5pt}}\\[0.8cm]
+  {\Huge\bfseries\color{principale} Guide d'utilisation\par}
+  \vspace{0.5cm}
+  {\LARGE \nomproduit\par}
+  \vspace{0.4cm}
+  {\color{principale}\rule{\linewidth}{1.5pt}}\\[2cm]
+  {\large \today\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\label{sec:introduction}
+Cette application permet de répartir les élèves dans les classes, en prenant en compte le profil de chacun des élèves. L'application permet de paramétrer toutes les contraintes, et de trouver une bonne solution.
+
+L'application \nomproduit{} permet de donner une répartition des participants sur chacune des tables.
+Ce guide explique comment utiliser \nomproduit{} en quelques étapes.
+
+\begin{note}
+Ce guide d'utilisation s'adresse aux personnes disposant d'un ordinateur Windows. Pour les autres, les fichiers sources sont disponibles sur le site \url{https://maxivignou.github.io/projets_sur_demande/} : Dans le projet \nomproduit{}, cliquez sur \textit{Téléchargez les fichiers sources (.zip)}. Il faudra alors exécuter le fichier \textit{main.py}. Je vous invite à regarder comment faire sur Internet.
+\end{note}
+
+\section{Téléchargement}
+\label{sec:telechargement}
+\begin{enumerate}
+  \item Rendez-vous sur le site suivant : \url{https://maxivignou.github.io/projets_sur_demande/}.
+  \item Retrouvez le projet \nomproduit{} et cliquez sur \textit{Téléchargez l'application (.exe)}.
+  \item Ouvrez l'application.
+\end{enumerate}
+
+\begin{astuce}
+Avant de pouvoir utiliser l'application, vous devez disposer de la liste des élèves ainsi que de leurs profils. Ils doivent être formatés de la même manière que dans le fichier modèle. Pour plus d'informations, suivez la \hyperref[sec:eleves]{section \ref{sec:eleves}}.
+\end{astuce}
+
+\section{Mode d'emploi}
+\label{sec:emploi}
+\begin{enumerate}
+  \item Importez le fichier des profils des élèves. Le fichier est décrit dans la \hyperref[sec:eleves]{section \ref{sec:eleves}}.
+  \item Saisissez le nombre de classes, puis validez. \begin{note}Cette page de l'application va se fermer, puis une suivante va s'ouvrir dans les secondes qui suivent.\end{note}
+  \item Dans la fenêtre qui s'ouvre, vous disposez de multiples constructeurs de contraintes. Chacune est décrite ci-dessous.\begin{attention}Si les contraintes que vous entrez sont trop lourdes (c'est-à-dire qu'il est impossible de trouver une solution qui vérifie toutes les contraintes), les contraintes s'appliqueront dans l'ordre dans lequel vous les indiquerez. Prenez garde à enregistrer les contraintes de la plus importante à la moins importante.\end{attention}\begin{note}Tout au long de l'avancée de l'enregistrement de vos contraintes, vous pouvez retrouver toutes les contraintes enregistrées dans la section \textit{Recapitulatif des contraintes}, et aussi les supprimer en cas d'erreur.\end{note}.
+  \begin{itemize}
+    \item Charger des contraintes \begin{note}Après la recherche de solution, vous pourrez, si vous le souhaitez, enregistrer les contraintes que vous avez créées, pour pouvoir les réutilisez.\end{note}
+    \begin{enumerate}
+      \item Importez le fichier des contraintes.
+      \item Validez le fichier. Les contraintes du fichier seront automatiquement enregistrées. \begin{danger}Ce fichier que vous transmettez doit être issu d'un enregistrement de contraintes d'une utilisation précédente. Ce fichier doit être parfaitement intègre, sous peine de faire échouer voire planter la recherche.\end{danger}
+    \end{enumerate}
+    \item \textit{Interdire une option dans une classe}
+    \begin{enumerate}
+      \item Choisissez l'option qui sera interdite.
+      \item Rensignez la lettre de la classe concernée.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Forcer une option dans une classe}
+    \begin{enumerate}
+      \item Choisissez l'option qui sera forcée.
+      \item Rensignez la lettre de la classe concernée.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \begin{astuce}Si vous voulez forcer une option à être dans les classes n°1 ou n°2, ce n'est pas cette contrainte qu'il faut utiliser. Il faut utiliser, sur toutes les autres classes, la contrainte \textit{Interdire une option dans une classe}. En effet, si on force dans un premier temps dans la classe n°1, l'option sera interdite dans toutes les autres classes, en particulier la classe n°2. Puis en forçant dans la classe n°2, l'option sera interdite dans toutes les autres classes, en particulier la classe n°1. Donc les élèves suivant l'option ne pourraient plus être placés.\end{astuce}
+    \item \textit{Nombre d'élèves suivant une option dans une classe}
+    \begin{enumerate}
+      \item Choisissez l'option qui sera à numériser.
+      \item Rensignez la lettre de la classe concernée.
+      \item Rensignez la contrainte du nombre d'élèves suivant l'option dans la classe.
+      \begin{note} Ces deux champ permettent de donner une borne. Si vous choisssez $=$, alors cela signifie que la quantité d'élèves suivant l'option doit être égal au nombre que vous indiquerez ensuite. Si vous choisissez $<$, alors cela signifie que la quantité d'élèves suivant l'option ne pourra pas être égal ou dépasser le nombre que vous indiquerez ensuite. Si vous choisissez $>$, alors cela signifie que la quantité d'élèves suivant l'option ne pourra pas être égal ou inférieur au nombre que vous indiquerez ensuite.\end{note}\begin{astuce} Si vous vouliez utiliser un opérateur $\le$, alors il faut utiliser l'opérateur $<$ en incrémentant de 1 le nombre que vous souhaitiez indiquer initialement. De même pour l'opérateur $\ge$, il faut utiliser l'opérateur $>$ en diminuant de 1 le nombre que vous souhaitiez indiquer initialement\end{astuce}
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Nombre d'élèves dans une classe}
+    \begin{enumerate}
+      \item Rensignez la lettre de la classe concernée.
+      \item Rensignez la contrainte du nombre d'élèves suivant l'option dans la classe.
+      \begin{note} Ces deux champ permettent de donner une borne. Si vous choisssez $=$, alors cela signifie que la quantité d'élèves suivant l'option doit être égal au nombre que vous indiquerez ensuite. Si vous choisissez $<$, alors cela signifie que la quantité d'élèves suivant l'option ne pourra pas être égal ou dépasser le nombre que vous indiquerez ensuite. Si vous choisissez $>$, alors cela signifie que la quantité d'élèves suivant l'option ne pourra pas être égal ou inférieur au nombre que vous indiquerez ensuite.\end{note}\begin{astuce} Si vous vouliez utiliser un opérateur $\le$, alors il faut utiliser l'opérateur $<$ en incrémentant de 1 le nombre que vous souhaitiez indiquer initialement. De même pour l'opérateur $\ge$, il faut utiliser l'opérateur $>$ en diminuant de 1 le nombre que vous souhaitiez indiquer initialement\end{astuce}
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Séparer deux élèves}
+    \begin{enumerate}
+      \item Choisissez les deux élèves à séparer.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Regrouper deux élèves}
+    \begin{enumerate}
+      \item Choisissez les deux élèves à regrouper.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Interdire un élève dans une classe}
+    \begin{enumerate}
+      \item Choisissez l'élève concerné.
+      \item Rensignez la lettre de la classe concernée.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Forcer un élève dans une classe}
+    \begin{enumerate}
+      \item Choisissez l'élève concerné.
+      \item Rensignez la lettre de la classe concernée.
+      \item Validez la contrainte.
+    \end{enumerate}
+    \item \textit{Equilibrer la répartition des élèves suivant une option entre les classes}
+    \begin{note}Cet équilibre permet de répartir le plus équitablement possible les élèves qui suivent une ou des options spécifiées entre les classes sélectionnées.\end{note}\begin{astuce}La plupart du temps, on sélectionne une option (celle à équilibrer) et plusieurs classes.\end{astuce}\begin{attention}L'équilibre ne permet pas d'indiquer dans quelles classes doivent être les élèves qui suivent telle ou telle option. Pour cela, il faut utiliser la contrainte \textit{Interdire une option dans une classe}.\end{attention}
+    \begin{enumerate}
+      \item Sélectionnez les options concernées.
+      \item Sélectionnez les classes concernées.
+      \item Validez l'équilibre.
+    \end{enumerate}
+    \item \textit{Equilibrer la répartition des options à l'intérieur des classses}
+    \begin{note}Cet équilibre permet d'assigner du mieux possible les élèves, de telle manière que l'écart entre le nombre total d'élèves qui suivent une option sélectionnée et le nombre total d'élèves qui suivent une autre option sélectionnée dans les classes spécifiées soit le plus faible possible.\end{note}\begin{astuce}La plupart du temps, on sélectionne une classe (celle à équilibrer) et plusieurs options.\end{astuce}\begin{attention}L'équilibre ne permet pas d'indiquer dans quelles classes doivent être les élèves qui suivent telle ou telle option. Pour cela, il faut utiliser la contrainte \textit{Interdire une option dans une classe}.\end{attention}
+    \begin{enumerate}
+      \item Sélectionnez les options concernées.
+      \item Sélectionnez les classes concernées.
+      \item Validez l'équilibre.
+    \end{enumerate}
+  \end{itemize}
+  \item Lorsque toutes les contraintes et tous les équilibres ont été enregistrés, envoyez les données et lancez la recherche. \begin{note}Cette page de l'application va se fermer. La page suivante peut mettre quelques secondes à s'afficher.\end{note}
+  \item Lorsque la page suivante s'affiche, la recherche est toujours en cours. On vous indique, dans le résultat actuel, combien d'élèves ne respectent pas les contraintes données, ainsi qu'un score d'équilibre (plus le score est bas, mieux c'est).
+  \item Lorsque le résultat vous convient, vous pouvez stopper la recherche, sauvegarder les contraintes et les équilibres, pour éventuellement les réutiliser plus tard, et télécharger le résultat en enregistrant le fichier où vous le souhaitez. Pour comprendre comment lire le résultat obtenu, suivez la \hyperref[sec:resultats]{section \ref{sec:resultats}}.
+  \item Exportez la solution en enregistrant le fichier où vous le souhaitez. Pour comprendre comment lire le fichier obtenu, suivez la \hyperref[sec:resultats]{section \ref{sec:resultats}}.
+\end{enumerate}
+
+\begin{danger}
+Si vous fermez la troisième page avant d'avoir exporté le fichier résultats, vous perdrez la solution obtenue. Pensez à bien télécharger la solution avant de quitter.
+\end{danger}
+
+\section{Profil des élèves}
+\label{sec:eleves}
+\begin{note}
+Un modèle de fichier est disponible sur le site \url{https://maxivignou.github.io/projets_sur_demande/} : Dans le projet \nomproduit{}, cliquez sur \textit{Téléchargez le modèle de fichier élèves (.csv)}.
+\end{note}
+L'application demande les profils des élèves, stockés dans un fichier \textit{.csv}. Cette section vous explique comment créer ce fichier.
+
+\begin{enumerate}
+  \item Ouvrir un classeur (Microsoft Excel, LibreOffice Calc, OpenOffice Calc, ...)
+  \item Sur la ligne n°1 (ligne d'en-tête), renseignez les cases suivantes : Nom | Prénom | Option n°1 | Option n°2 | ... avec autant d'options que nécessaires. \begin{astuce}Toutes les informations sont considérées comme des options. Par exemple, le genre d'un élève est considéré comme une option.\end{astuce}
+  \item Chacune des lignes suivante correspond à un élève. Entrez son nom, son prénom, et l'intitulé de chacune de ses options. \begin{attention}Soyez vigilant à la casse. Si pour un élève vous écrivez \textit{Théâtre} et que pour un autre vous écrivez \textit{Théatre}, cela sera considéré comme deux options différentes.\end{attention}
+  \item Enregistrez le fichier au format \textit{.csv} :
+  \begin{enumerate}
+    \item Cliquez sur \textit{Fichier}, puis sur \textit{Enregistrer sous}.
+    \item Choisissez l'emplacement où enregistrer le fichier.
+    \item Dans la liste \textit{Type de fichier}, sélectionnez :
+    \begin{itemize}
+      \item \textit{CSV UTF-8 (délimité par des virgules) (*.csv)} sur Microsoft Excel.
+      \item \textit{Texte CSV (.csv)} sur OpenOffice Calc ou LibreOffice Calc.
+    \end{itemize}
+    \item Saisissez le nom du fichier en conservant l'extension \textit{.csv}, puis cliquez sur \textit{Enregistrer}.
+    \item Pour finir l'enregistrement :
+    \begin{itemize}
+      \item Sur Microsoft Excel, si un message apparaît, confirmez l'utilisation du format CSV.
+      \item Sur LibreOffice Calc et OpenOffice Calc, dans la fenêtre d'options d'exportation, choisissez si nécessaire le jeu de caractères \textit{Unicode (UTF-8)}, le séparateur \textit{;}, puis validez.
+    \end{itemize}
+  \end{enumerate}
+\end{enumerate}
+\begin{astuce}
+  La recherche est déterministe, c'est-à-dire que si on donne le même fichier et les mêmes contraintes, le même résultat sera renvoyé. De plus, l'assignation des élèves est séquentielle, c'est-à-dire qu'on va assigner une classe aux élèves dans l'ordre (à peu près). Si la liste de vos élèves est triée dans l'ordre alphabétique, les premiers de l'alphabet risque de se retrouver dans la même classe. Pour contrer ce phénomène, voici une manière de mélanger aléatoirement la liste :
+  \begin{enumerate}
+    \item Dans la première colonne non-vide, sur la ligne d'en-tête, entrez le texte \textit{Désordre}.
+    \item Pour le premier élève, écrivez la formule $=ENT(ALEA()*100000000)$. Un nombre entier devrait s'afficher.
+    \item Ensuite, sélectionner cette cellule. Vous devriez voir apparaître un petit carré en bas à droite de la cellule. Cliquez sur ce petit carré, et toujours en restant cliqué, glissez vers le bas jusqu'au dernier élève. Relâchez quand vous arrivez au dernier élève. Chaque élève devrait alors avoir un nombre.
+    \item Sélectionnez toutes les données (pour aller plus vite, vous pouvez faire \textit{CTRL+A}).
+    \item Cliquez sur le menu \textit{Données}, puis cliquez sur \textit{Trier}.
+    \item Dans la fenêtre de tri, choisissez la colonne \textit{Désordre}.
+    \item Choisissez l'ordre croissant, ou l'ordre alphabétique, ou de A à Z, selon la dénomination.
+    \item Indiquez que la première ligne contient des en-têtes, puis cliquez sur \textit{OK}. Le tableau s'est alors mélangé.
+    \item Vous pouvez alors supprimer cette colonne \textit{Désordre}, puis enregistrer le fichier.
+  \end{enumerate}
+\end{astuce}
+\section{Lire les résultats}
+\label{sec:resultats}
+Lorsque vous avez utilisé l'application, vous avez téléchargé un fichier contenant les résultats. Il s'agit d'un fichier au format \textit{.csv}. Cette section vous explique comment lire les résultats du fichier.
+\begin{enumerate}
+  \item Ouvrir Microsoft Excel, OpenOffice Calc ou LibreOffice Calc.
+  \item Cliquez sur \textit{Fichiers}, puis sur \textit{Ouvrir}.
+  \item Recherchez le fichier \textit{.csv} que vous aviez récupéré. Si nécessaire, choisissez \textit{Tous les fichiers} dans le filtre de fichiers.
+  \item Sélectionnez le fichier \textit{.csv} puis cliquez sur \textit{Ouvrir}.
+  \item Si une fenêtre d'importation apparaît, vérifier que l'encodage (le jeu de caractères) est bien \textit{Unicode UTF-8}, et que le séparateur est \textit{;}. Vérifier alors que l'aperçu renvoie bien quelque chose de lisible, puis validez en cliquant sur \textit{OK}.
+  \item Enregistrez le fichier au format que vous souhaitez (\textit{.xlsx} pour Microsoft Excel ou \textit{.ods} pour LibreOffice Calc ou OpenOffice Calc).
+\end{enumerate}
+Chaque ligne du fichier correspond à un participant. Les options de chacun des élèves sont spécifiées, puis la classe de l'élève est donnée. Les deux dernières colonnes sont données à titre indicatif : La première des deux indique si, selon les contraintes, il est possible de déplacer l'élève dans une autre classe (en l'échangeant avec un autre par exemple). La deuxième indique si l'élève respecte les contraintes fournies. En effet, dans le cas où le problème que vous aviez donné serait insatisfiable, l'application aura tenté de faire au mieux.
+
+\section{Conclusion}
+\label{sec:conclusion}
+J'ai essayé de faire en sorte que les explications soient les plus claires possibles. Si vous rencontrez des difficultés, où que vous remarquez une erreur, n'hésitez pas à me contacter à l'adresse mail suivante : \href{mailto:matthieu.vigneron13@gmail.com}{matthieu.vigneron13@gmail.com}.
+\end{document}
