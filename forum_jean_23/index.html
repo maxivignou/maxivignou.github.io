@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forum du Lycée Jean 23 - 28 nov 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<style>
+  :root {
+    --fond: #e9eef3;
+    --encre: #000000;
+    --accent: #f2b134;      /* bandeau titre */
+    --accent-2: #0f6e6a;    /* fil et progression */
+    --duree: 15s;           /* garder identique à DUREE_MS dans le script */
+    --police: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+	--ratio: 1.7778;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--police);
+    background: var(--fond);
+    color: var(--encre);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  /* ---------- En-tête toujours visible ---------- */
+header {
+  background: var(--encre);
+  color: #fff;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;            /* centre lieu/date verticalement (haut-bas) */
+  justify-content: space-between; /* titres à gauche, lieu/date à droite */
+  gap: 24px;
+}
+.titres { display: flex; flex-direction: column; gap: 2px; }
+header h1 { font-size: clamp(1.1rem, 2vw, 1.8rem); font-weight: 800; letter-spacing: -.01em; line-height: 1.15; }
+header p  { font-size: clamp(.9rem, 1.4vw, 1.2rem); opacity: .75; text-align: right; }
+
+  /* ---------- Corps : fil + scène ---------- */
+  main { display: grid; grid-template-columns: clamp(190px, 20vw, 300px) 1fr; min-height: 0; }
+
+  nav { padding: 28px 12px 28px 28px; overflow-y: auto; padding-bottom: 80px;}
+  nav ol { list-style: none; padding: 0; position: relative; display: flex; flex-direction: column; gap: 4px; }
+  nav ol::before {            /* le « fil » vertical */
+    content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 3px; background: #b9c6d2; border-radius: 2px;
+  }
+  nav button {
+    position: relative; width: 100%; text-align: left; cursor: pointer;
+    font: inherit; font-weight: 400; font-size: clamp(.9rem, 1.3vw, 1.2rem);
+    color: inherit; background: none; border: 0; border-radius: 6px;
+    padding: 9px 8px 9px 34px; line-height: 1.2;
+  }
+  nav button::before {        /* le point sur le fil */
+    content: ""; position: absolute; left: 0; top: 50%; translate: 0 -50%;
+    width: 17px; height: 17px; border-radius: 50%;
+    background: var(--fond); border: 3px solid var(--c, #b9c6d2);
+    transition: background .3s;
+  }
+  nav button:hover { background: rgba(19,40,59,.07); }
+  nav button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+  nav button.actif { font-weight: 800; }
+  nav button.actif::before { background: var(--c, var(--accent-2)); border-color: var(--c, var(--accent-2)); }
+  nav button .barre {         /* progression des 15 s sous le titre actif */
+    position: absolute; left: 34px; right: 8px; bottom: 3px; height: 3px;
+    background: transparent; border-radius: 2px; overflow: hidden; display: none;
+  }
+  nav button.actif .barre { display: block; background: rgba(15,110,106,.18); }
+  nav button .barre i {
+    display: block; height: 100%; width: 100%; background: var(--accent-2);
+    transform-origin: left; animation: remplir var(--duree) linear forwards;
+  }
+  @keyframes remplir { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* ---------- Scène et diapos ---------- */
+  .scene { position: relative; padding: 24px 32px 32px 8px; min-height: 0; }
+  .diapo { position: absolute; inset: 24px 32px 32px 8px; opacity: 0; visibility: hidden; transition: opacity .6s, visibility .6s; --s-auto: calc(100cqw - (100cqw - 100cqh) / (1 - 1 / var(--ratio)) + 40px); --s: max(15vw, var(--s-auto)); --w: calc(100cqw - var(--s) + 40px); container-type: size; }
+  .diapo.active { opacity: 1; visibility: visible; }
+
+  /* Zone image : prend toute la place, décalée pour laisser mordre le bandeau */
+  .image {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: var(--w);
+    aspect-ratio: var(--ratio);
+    border-radius: 18px; overflow: hidden;
+    background: #ffffff;
+    display: grid; place-items: center;
+    box-shadow: 0 10px 30px rgba(19,40,59,.18);
+  }
+  .image img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: contain;
+    opacity: 0; transition: opacity .6s;
+  }
+  .image img.visible { opacity: 1; }
+  .image .vide { font-size: 1.4rem; opacity: .5; text-align: center; padding: 20px; }
+
+  /* Zone titre + QR code : en haut à gauche, déborde sur l'image */
+  .titre {
+    position: absolute; top: 0; left: 0; z-index: 2;
+    width: var(--s);
+    background: var(--c, var(--accent)); color: var(--t, var(--encre));
+    border-radius: 18px; padding: 22px 24px 24px;
+    display: flex; flex-direction: column; gap: 18px;
+    box-shadow: 0 8px 24px rgba(19,40,59,.25);
+	aspect-ratio: 1 / 1;
+    justify-content: space-between;   /* titre en haut, QR code en bas */
+  }
+  .titre h2 { font-size: calc(var(--s) * 0.11);; font-weight: 800; line-height: 1.05; letter-spacing: -.01em; text-align: center;}
+  .titre .sous { font-size: clamp(.9rem, 1.3vw, 1.15rem); line-height: 1.3; }
+  .qr {
+    flex: 1;                    /* prend tout l'espace restant sous le titre */
+    min-height: 0;
+    container-type: size;       /* permet de mesurer cet espace avec cqw / cqh */
+    display: flex; justify-content: center; align-items: center;
+  }
+  .qr .code {
+    width: min(100cqw, 100cqh); /* le plus grand carré possible dans l'espace */
+    height: min(100cqw, 100cqh);
+    background: #fff; padding: 3%; border-radius: 10px; line-height: 0;
+    display: flex;
+  }
+  .qr .code img, .qr .code canvas { width: 100% !important; height: 100% !important; }
+  .qr small { font-size: clamp(.8rem, 1.1vw, 1rem); line-height: 1.25; font-weight: 600; }
+
+  /* ---------- Petits écrans ---------- */
+  @media (max-width: 800px) {
+    body { overflow: auto; }
+    main { grid-template-columns: 1fr; }
+    nav { padding: 12px; }
+    nav ol { flex-direction: row; flex-wrap: wrap; }
+    nav ol::before { display: none; }
+    nav button { width: auto; padding-left: 12px; }
+    nav button::before, nav button .barre { display: none !important; }
+    nav button.actif { background: rgba(15,110,106,.15); }
+    .scene { height: 80vh; padding: 12px; }
+    .diapo { inset: 12px; }
+    .titre { width: 70%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .diapo { transition: none; }
+  }
+  #lecture {
+    position: fixed; left: 28px; bottom: 20px; z-index: 10;
+    font: inherit; font-weight: 600; font-size: clamp(.9rem, 1.2vw, 1.1rem);
+    color: #fff; background: var(--accent-2);
+    border: 0; border-radius: 999px; padding: 10px 20px; cursor: pointer;
+  }
+  #lecture:hover { filter: brightness(1.1); }
+  #lecture:focus-visible { outline: 3px solid var(--encre); outline-offset: 3px; }
+  body.pause .barre i { animation-play-state: paused; }   /* la barre du fil s'arrête aussi */
+</style>
+</head>
+<body>
+
+<header>
+  <div class="titres">
+    <h1>DOUBLE LICENCE MATHÉMATIQUES - INFORMATIQUE (Université d'Angers)</h1>
+    <h1>MASTER INFORMATIQUE (Ecole Normale Supérieure de Paris-Saclay)</h1>
+  </div>
+  <p>Lycée Jean 23 (Les Herbiers) · 28 nov 2026</p>
+</header>
+
+<main>
+  <nav aria-label="Plan du diaporama"><ol id="fil"></ol></nav>
+
+  <section class="scene" id="scene" aria-live="off">
+
+    <!-- ============================================================
+         DIAPOS : copiez-collez un bloc <article> par diapo.
+         Le fil à gauche se met à jour tout seul.
+         - data-titre : titre affiché dans le fil ET sur la diapo
+         - data-qr    : adresse encodée dans le QR code (laisser vide = pas de QR)
+         - data-image : chemin de l'image (laisser vide = zone grise)
+         ============================================================ -->
+
+    <article class="diapo" data-duree="10000" data-couleur="#68b9ea" data-titre="Université d'Angers"  data-image="univ_angers.png" data-qr="https://www.univ-angers.fr/fr/index.html"> </article>
+
+    <article class="diapo" data-duree="15000" data-couleur="#68b9ea" data-titre="Parcoursup"  data-image="parcoursup_dlmi.png" data-qr="https://dossier.parcoursup.fr/Candidats/public/fiches/afficherFicheFormation?g_ta_cod=35715&typeBac=0&originePc=0"> </article>
+
+    <article class="diapo" data-duree="15000" data-couleur="#68b9ea" data-titre="Page Web"  data-image="page_web_dlmi.png" data-qr="https://info.univ-angers.fr/offre-de-formation/double-licence-mathematiques-informatique/"> </article>
+
+    <article class="diapo" data-duree="15000" data-couleur="#68b9ea" data-titre="Discord"  data-image="discord_dlmi.png" data-qr="https://discord.gg/ryW8bNzAp"> </article> <!-- Expire le 29 nov 2026 -->
+
+    <article class="diapo" data-couleur="#68b9ea" data-titre="Langages"  data-image="langages_dlmi.png"> </article>
+
+    <article class="diapo" data-duree="25000" data-couleur="#68b9ea" data-titre="Emploi du temps"  data-images="edt_dlmi1.png, edt_mi1.png, edt_dlmi3.png, edt_m3.png, edt_i3.png", data-duree-image="5000"> </article>
+
+    <article class="diapo" data-duree="10000" data-couleur="#0d6f8a" data-texte="#ffffff" data-titre="Ecole Normale Supérieure de Paris-Saclay"  data-image="ens_paris_saclay.png" data-qr="https://ens-paris-saclay.fr/"> </article>
+
+    <article class="diapo" data-couleur="#0d6f8a" data-texte="#ffffff" data-titre="Entrée à l'ENS"  data-image="entree_ens.png"> </article>
+
+    <article class="diapo" data-duree="15000" data-couleur="#0d6f8a" data-texte="#ffffff" data-titre="Page web"  data-image="page_web_ens.png" data-qr="https://informatique.ens-paris-saclay.fr/"> </article>
+
+    <article class="diapo" data-couleur="#0d6f8a" data-texte="#ffffff" data-titre="Année spécifique de parcours"  data-image="asp_ens.png"> </article>
+
+  </section>
+</main>
+<button id="lecture" type="button" aria-label="Mettre en pause">⏸ Pause</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(() => {
+  const DUREE_MS = 20000;           // durée d'une diapo (garder --duree identique en CSS)
+  const DOSSIER_ARCHIVE = 'archive_2026';
+  const diapos = [...document.querySelectorAll('.diapo')];
+  const fil = document.getElementById('fil');
+  const boutons = [];
+  let courant = -1, enPause = false, ecoule = 0;
+  let duree = DUREE_MS, pas = 5000, photos = [], k = 0;
+
+  // Construit chaque diapo : bandeau titre + QR, et zone image
+  diapos.forEach((d, i) => {
+    const titre = d.dataset.titre || `Diapo ${i + 1}`;
+    const sous = d.querySelector('.sous');
+    const legende = d.querySelector('.legende-qr');
+    const url = d.dataset.qr, src = d.dataset.image;
+    if (d.dataset.couleur) d.style.setProperty('--c', d.dataset.couleur);
+    if (d.dataset.texte) d.style.setProperty('--t', d.dataset.texte);
+    const image = document.createElement('div');
+    image.className = 'image';
+    const liste = (d.dataset.images || src || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (liste.length) {
+      liste.forEach(u => {
+        const img = document.createElement('img');
+        img.alt = titre; img.className = 'photo';
+        const essais = [u, DOSSIER_ARCHIVE + '/' + u];   // 1) même dossier, 2) dossier « archive »
+        let n = 0;
+        img.onerror = () => {
+          if (++n < essais.length) { img.src = essais[n]; return; }
+          console.warn('Image introuvable :', u);
+          const p = d._photos;                 // on l'écarte de la rotation
+          if (p && p.includes(img)) p.splice(p.indexOf(img), 1);
+          img.remove();
+        };
+        img.src = essais[0];
+        image.append(img);
+      });
+    } else {
+      image.innerHTML = '<span class="vide">Image à ajouter<br>(attribut data-image)</span>';
+    }
+    d._photos = [...image.querySelectorAll('.photo')];
+
+    const bandeau = document.createElement('div');
+    bandeau.className = 'titre';
+    const h2 = document.createElement('h2');
+    h2.textContent = titre;
+    bandeau.append(h2);
+    if (sous) bandeau.append(sous);
+    if (url) {
+      const qr = document.createElement('div');
+      qr.className = 'qr';
+      const code = document.createElement('div');
+      code.className = 'code';
+      qr.append(code);
+      if (legende) { legende.remove(); const s = document.createElement('small'); s.textContent = legende.textContent; qr.append(s); }
+      bandeau.append(qr);
+      if (window.QRCode) new QRCode(code, { text: url, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+      else code.textContent = url;
+    } else if (legende) legende.remove();
+
+    d.append(image, bandeau);
+
+    // Entrée correspondante dans le fil
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = titre;
+	if (d.dataset.couleur) b.style.setProperty('--c', d.dataset.couleur);
+    b.addEventListener('click', () => aller(i));
+    li.append(b);
+    fil.append(li);
+    boutons.push(b);
+  });
+
+  function aller(i) {
+    i = (i + diapos.length) % diapos.length;
+    if (i === courant) return;
+    if (courant >= 0) {
+      diapos[courant].classList.remove('active');
+      boutons[courant].classList.remove('actif');
+      boutons[courant].removeAttribute('aria-current');
+      boutons[courant].querySelector('.barre')?.remove();
+    }
+    courant = i;
+    diapos[i].classList.add('active');
+    const b = boutons[i];
+    b.classList.add('actif');
+    b.setAttribute('aria-current', 'true');
+    const barre = document.createElement('span');
+    barre.className = 'barre';
+    barre.innerHTML = '<i></i>';
+    b.append(barre);
+    b.scrollIntoView({ block: 'nearest' });
+    duree = +diapos[i].dataset.duree || DUREE_MS;
+    pas = +diapos[i].dataset.dureeImage || 5000;
+    photos = diapos[i]._photos || [];
+    photos.forEach((p, n) => p.classList.toggle('visible', n === 0));
+    k = 0; ecoule = 0;
+    barre.querySelector('i').style.animationDuration = duree + 'ms';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') aller(courant + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') aller(courant - 1);
+  });
+  const maj = () => document.documentElement.style.setProperty('--ratio', innerWidth / innerHeight);
+  addEventListener('resize', maj); maj();
+  // Horloge unique : avance de 100 ms, sauf en pause
+  setInterval(() => {
+    if (enPause || courant < 0) return;
+    ecoule += 100;
+    if (ecoule >= duree) { aller(courant + 1); return; }
+    if (photos.length > 1) {
+      const n = Math.floor(ecoule / pas) % photos.length;
+      if (n !== k) { photos[k].classList.remove('visible'); photos[n].classList.add('visible'); k = n; }
+    }
+  }, 100);
+
+  // Bouton lecture / pause
+  const btn = document.getElementById('lecture');
+  function basculer() {
+    enPause = !enPause;
+    document.body.classList.toggle('pause', enPause);
+    btn.textContent = enPause ? '▶ Lecture' : '⏸ Pause';
+    btn.setAttribute('aria-label', enPause ? 'Reprendre le diaporama' : 'Mettre en pause');
+  }
+  btn.addEventListener('click', basculer);
+  document.addEventListener('keydown', e => {
+    if (e.key === ' ' && e.target.tagName !== 'BUTTON') { e.preventDefault(); basculer(); }
+  });
+  if (diapos.length) aller(0);
+})();
+</script>
+</body>
+</html>
