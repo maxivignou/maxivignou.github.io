@@ -2,9 +2,9 @@
   var MOIS_DEBUT_SAISON = 7; // une saison va de juillet (N) à juin (N+1)
   // ---------- patchs (badge de la 7e colonne) ----------
   var PATCHS = {
-    'Départemental 85': 'dep',
-    'Régional PDL': 'pdl',
-    'Régional IDF': 'idf',
+    'CD-85': 'dep',
+    'L-PDL': 'pdl',
+    'L-IDF': 'idf',
     'LIFSU': 'lifsu'
   };
   Array.prototype.forEach.call(document.querySelectorAll('#arb-table tbody tr'), function(tr){
