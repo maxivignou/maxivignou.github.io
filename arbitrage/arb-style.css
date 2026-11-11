@@ -57,10 +57,31 @@ header{margin-bottom:3rem;}
 #arb-table tbody tr{border-top:1px solid var(--line);}
 #arb-table tbody tr:hover{background:rgba(47,102,144,0.07);}
 #arb-table td:nth-child(1){white-space:nowrap;color:var(--ink-soft);}
-#arb-table th:nth-child(n+4), #arb-table td:nth-child(n+4){
+#arb-table th:nth-child(n+4):nth-child(-n+6), #arb-table td:nth-child(n+4):nth-child(-n+6){
   text-align:right;font-variant-numeric:tabular-nums;
 }
 #arb-table td:nth-child(n+4){white-space:nowrap;}
+
+/* patchs */
+.patch{
+  display:inline-block;padding:0.15rem 0.6rem;border-radius:999px;
+  font-size:0.72rem;font-weight:600;line-height:1.5;white-space:nowrap;
+  color:var(--p);
+  background:color-mix(in srgb, var(--p) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--p) 45%, transparent);
+}
+.patch.dep{--p:#4A6B7A;}    /* Départemental 85 */
+.patch.pdl{--p:#2F6690;}    /* Régional PDL */
+.patch.idf{--p:#3E4C9E;}    /* Régional IDF */
+.patch.lifsu{--p:#236F62;}  /* LIFSU */
+.patch.autre{--p:#5A6B75;}
+@media (prefers-color-scheme: dark){
+  .patch.dep{--p:#8FB0BF;}
+  .patch.pdl{--p:#7FB3D5;}
+  .patch.idf{--p:#9AA5E8;}
+  .patch.lifsu{--p:#6FCFBB;}
+  .patch.autre{--p:#95A6AF;}
+}
 .hint{margin-top:0.8rem;font-size:0.82rem;color:var(--ink-soft);}
 .hint code{background:var(--line);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.8rem;}
 
