@@ -1,6 +1,22 @@
 (function(){
   var MOIS_DEBUT_SAISON = 7; // une saison va de juillet (N) à juin (N+1)
-
+  // ---------- patchs (badge de la 7e colonne) ----------
+  var PATCHS = {
+    'Départemental 85': 'dep',
+    'Régional PDL': 'pdl',
+    'Régional IDF': 'idf',
+    'LIFSU': 'lifsu'
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('#arb-table tbody tr'), function(tr){
+    var td = tr.cells[6];
+    if (!td || !td.textContent.trim()) return;
+    var label = td.textContent.trim();
+    var span = document.createElement('span');
+    span.className = 'patch ' + (PATCHS[label] || 'autre');
+    span.textContent = label;
+    td.textContent = '';
+    td.appendChild(span);
+  });
   // ---------- lecture du tableau ----------
   function num(cell){
     return parseFloat(cell.textContent.replace(/\s/g, '').replace(',', '.')) || 0;
