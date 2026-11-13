@@ -70,11 +70,11 @@ header{margin-bottom:3rem;}
   background:color-mix(in srgb, var(--p) 14%, transparent);
   border:1px solid color-mix(in srgb, var(--p) 45%, transparent);
 }
-.patch.dep{--p:#4A6B7A;}    /* Départemental 85 */
-.patch.pdl{--p:#2F6690;}    /* Régional PDL */
-.patch.idf{--p:#3E4C9E;}    /* Régional IDF */
-.patch.lifsu{--p:#236F62;}  /* LIFSU */
-.patch.autre{--p:#5A6B75;}
+.patch.dep{--p:#d51030;}    /* Départemental 85 */
+.patch.pdl{--p:#88a9d9;}    /* Régional PDL */
+.patch.idf{--p:#f16646;}    /* Régional IDF */
+.patch.lifsu{--p:#0074a5;}  /* LIFSU */
+.patch.autre{--p:#ffffff;}
 @media (prefers-color-scheme: dark){
   .patch.dep{--p:#8FB0BF;}
   .patch.pdl{--p:#7FB3D5;}
